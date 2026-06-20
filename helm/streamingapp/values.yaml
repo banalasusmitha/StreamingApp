@@ -1,0 +1,54 @@
+image:
+  registry: 123456789012.dkr.ecr.ap-south-1.amazonaws.com   # overridden by Jenkins --set
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Shared config injected into backend services
+config:
+  jwtSecret: "changeme"
+  clientUrls: "http://localhost:3000"
+  mongoDb: "streamingapp"
+  awsRegion: "ap-south-1"
+
+mongo:
+  enabled: true
+  image: mongo:6
+  storage: 5Gi
+
+services:
+  auth:
+    repo: streamingapp-auth
+    port: 3001
+    replicas: 2
+  streaming:
+    repo: streamingapp-streaming
+    port: 3002
+    replicas: 2
+  admin:
+    repo: streamingapp-admin
+    port: 3003
+    replicas: 1
+  chat:
+    repo: streamingapp-chat
+    port: 3004
+    replicas: 1
+
+frontend:
+  repo: streamingapp-frontend
+  port: 80
+  replicas: 2
+  serviceType: LoadBalancer
+
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

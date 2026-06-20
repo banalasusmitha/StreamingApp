@@ -1,0 +1,21 @@
+PROJECT SUBMISSION — Orchestration and Scaling
+================================================
+
+Student name : <your name>
+Cohort       : <your cohort>
+
+GitHub repository (fork) with all code + documentation:
+https://github.com/<your-username>/StreamingApp
+
+Key paths in the repo:
+- CI/CD pipeline ............ /Jenkinsfile
+- Helm chart ................ /helm/streamingapp
+- Setup scripts ............. /scripts
+- Full documentation ....... /docs/README.md
+
+Notes for the evaluator:
+- Five containerized services pushed to Amazon ECR
+  (frontend, auth, streaming, admin, chat) + MongoDB.
+- Jenkins on EC2 builds & pushes on each commit, then deploys to EKS via Helm.
+- Monitoring/logging via CloudWatch Container Insights + Fluent Bit.
+- Bonus: SNS topic 'deployment-events' wired to Jenkins post-build for ChatOps.

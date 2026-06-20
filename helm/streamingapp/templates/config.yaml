@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: streamingapp-config
+data:
+  MONGO_URI: "mongodb://mongo:27017/{{ .Values.config.mongoDb }}"
+  CLIENT_URLS: "{{ .Values.config.clientUrls }}"
+  AWS_REGION: "{{ .Values.config.awsRegion }}"
+  STREAMING_PUBLIC_URL: "http://streaming:3002"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: streamingapp-secret
+type: Opaque
+stringData:
+  JWT_SECRET: "{{ .Values.config.jwtSecret }}"
