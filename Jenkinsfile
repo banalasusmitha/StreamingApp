@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     AWS_REGION   = "ap-south-1"
-    AWS_ACCOUNT  = "123456789012"                 // <-- replace with your AWS account ID
+    AWS_ACCOUNT  = "856705507541"
     REGISTRY     = "${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com"
     IMAGE_TAG    = "${env.BUILD_NUMBER}"
     // Frontend build-time API URLs (point at your ELB/Ingress host in real deploys)
